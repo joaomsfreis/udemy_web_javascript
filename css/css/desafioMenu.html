@@ -7,7 +7,84 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        /* ... */
+        body {
+            background-color: #ddd;
+            margin: 0px;
+        }
+
+        .cabecalho {
+            background-color: #444;
+            padding: 10px;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        img {
+            width: 175px;
+            height: 35px;
+        }
+
+        ul {
+            position: absolute;
+            top: 0px;
+            left: 180px;
+        }
+
+        .menu-toggle {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+
+        li {
+            display: inline;
+            margin: 2px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ddd;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-family: Oswald, sans-serif;
+            text-align: center;
+        }
+
+        .autenticacao {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            padding: 10px;
+        }
+
+        .botao{
+            text-decoration: none;
+            padding: 5px 15px;
+            border-radius: 25px;
+        }
+
+        .destaque {
+            margin: 10px;
+            color: #fff;
+            background: tomato;
+        }
+
+        .menu a:hover, .menu a.selected {
+            background-color: #ddd;
+            color: #444
+        }
+
+        @media (max-width: 700px) {
+            .autenticacao { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .menu-toggle { display: block; }
+            .menu { display: none;}
+        }
     </style>
 </head>
 
@@ -23,7 +100,7 @@
         </button>
         <nav class="menu">
             <ul>
-                <li>
+                <li class="selected">
                     <a href="#inicio">Início</a>
                 </li>
                 <li>
@@ -44,7 +121,14 @@
     </header>
 
     <script>
-        // ...
+        window.onhashchange = function(e) {
+            const oldURL = e.oldURL.split('#')[1]
+            const newURL = e.newURL.split('#')[1]
+            const oldMenu = document.querySelector(`.menu [href = '#${oldURL}']`)
+            const newMenu = document.querySelector(`.menu [href = '#${newURL}']`)
+            oldMenu && oldMenu.classList.remove('selected')
+            newMenu && newMenu.classList.add('selected')
+        }
     </script>
 </body>
 
